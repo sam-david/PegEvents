@@ -1,13 +1,28 @@
 class EventsController < ApplicationController
   def create
-    user = User.find_by(autodesk_id: event_params[:autodesk_id])
+    user = User.find_by(autodesk_id: event_params['event']['autodesk_id'])
+    event = Event.find_or_create_by(name: event_params['event']['name'])
 
+    user_event = UserEvent.create(
+      payload: event_params['event']['payload'],
+      event_at: event_params['event']['event_time']
+    )
 
+    user_event.user = user
+    user_event.event = event
+    user_event.save
+
+    #render json: user_event
+    render json: ['test']
   end
 
   private
 
+  # def event_params
+  #   params.require(:event).permit(:name, :autodesk_id, :payload, :event_time, :event)
+  # end
+
   def event_params
-    params.permit(:name, :autodesk_id, :payload)
+    JSON.parse(params['_json'])
   end
 end

@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2019_04_15_033647) do
     t.bigint "user_id"
     t.bigint "event_id"
     t.string "document_name"
+    t.json "payload"
     t.datetime "event_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
