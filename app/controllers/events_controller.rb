@@ -5,6 +5,7 @@ class EventsController < ApplicationController
 
     user_event = UserEvent.create(
       payload: event_params['event']['payload'],
+      version: event_params['event']['version'],
       event_at: event_params['event']['event_time']
     )
 
