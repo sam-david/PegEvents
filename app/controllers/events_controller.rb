@@ -1,17 +1,17 @@
 class EventsController < ApplicationController
   def create
-    user = User.find_by(autodesk_id: event_params['event']['autodesk_id'])
     event = Event.find_or_create_by(name: event_params['event']['name'])
+    session = UserSession.find_or_create_by(uuid: event_params['event']['session_uuid'])
 
     user_event = UserEvent.create(
       payload: event_params['event']['payload'],
       version: event_params['event']['version'],
       document_name: event_params['event']['document_name'],
-      session_id: event_params['event']['session_id'],
       event_at: event_params['event']['event_time']
     )
 
-    user_event.user = user
+
+    user_event.session = session
     user_event.event = event
     user_event.save
 

@@ -6,12 +6,16 @@ class UsersController < ApplicationController
       user.autodesk_displayname = user_params[:autodesk_display_name]
     end
 
+    session = UserSession.create(uuid: user_params[:session_uuid])
+    session.user = user
+    session.save
+
     render json: user
   end
 
   private
 
   def user_params
-    params.permit(:email, :autodesk_id, :autodesk_username, :autodesk_display_name)
+    params.permit(:email, :autodesk_id, :autodesk_username, :autodesk_display_name, :session_uuid)
   end
 end
