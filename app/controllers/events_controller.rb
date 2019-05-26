@@ -11,7 +11,7 @@ class EventsController < ApplicationController
     )
 
 
-    user_event.session = session
+    user_event.user_session = session
     user_event.event = event
     user_event.save
 
