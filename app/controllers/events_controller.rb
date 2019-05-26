@@ -7,6 +7,7 @@ class EventsController < ApplicationController
       payload: event_params['event']['payload'],
       version: event_params['event']['version'],
       document_name: event_params['event']['document_name'],
+      session_id: event_params['event']['session_id'],
       event_at: event_params['event']['event_time']
     )
 
